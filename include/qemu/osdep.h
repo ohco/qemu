@@ -29,13 +29,13 @@ typedef signed int              int_fast16_t;
 
 #ifndef glue
 #define xglue(x, y) x ## y
-#define glue(x, y) xglue(x, y) //why not "glue(x, y) x##y" derictely?
+#define glue(x, y) xglue(x, y) 
 #define stringify(s)	tostring(s)
-#define tostring(s)	#s //why???
+#define tostring(s)	#s 
 #endif
 
-#ifndef likely
-#if __GNUC__ < 3 // the version of GCC
+#ifndef likely //ensure the likely() function can run & optimize performance
+#if __GNUC__ < 3
 #define __builtin_expect(x, n) (x)
 #endif
 
@@ -43,14 +43,14 @@ typedef signed int              int_fast16_t;
 #define unlikely(x)   __builtin_expect(!!(x), 0)
 #endif
 
-#ifndef container_of
+#ifndef container_of //get the address of the struct with the address of the member
 #define container_of(ptr, type, member) ({                      \
         const typeof(((type *) 0)->member) *__mptr = (ptr);     \
         (type *) ((char *) __mptr - offsetof(type, member));})
 #endif
 
-/* Convert from a base type to a parent type, with compile time checking.  */
-#ifdef __GNUC__
+/*go from a base class to the derived class*/
+#ifdef __GNUC__ 
 #define DO_UPCAST(type, field, dev) ( __extension__ ( { \
     char __attribute__((unused)) offset_must_be_zero[ \
         -offsetof(type, field)]; \
@@ -59,8 +59,8 @@ typedef signed int              int_fast16_t;
 #define DO_UPCAST(type, field, dev) container_of(dev, type, field)
 #endif
 
-#define typeof_field(type, field) typeof(((type *)0)->field)
-#define type_check(t1,t2) ((t1*)0 - (t2*)0)
+#define typeof_field(type, field) typeof(((type *)0)->field) //return the type of the field
+#define type_check(t1,t2) ((t1*)0 - (t2*)0) //check if these two have the same type
 
 #ifndef MIN
 #define MIN(a, b) (((a) < (b)) ? (a) : (b))
@@ -76,7 +76,7 @@ typedef signed int              int_fast16_t;
 #endif
 
 #ifndef ROUND_UP
-#define ROUND_UP(n,d) (((n) + (d) - 1) & -(d))
+#define ROUND_UP(n,d) (((n) + (d) - 1) & -(d)) //&: (AND)
 #endif
 
 #ifndef DIV_ROUND_UP
@@ -108,7 +108,7 @@ void *qemu_anon_ram_alloc(size_t size, uint64_t *align);
 void qemu_vfree(void *ptr);
 void qemu_anon_ram_free(void *ptr, size_t size);
 
-#define QEMU_MADV_INVALID -1
+#define QEMU_MADV_INVALID -1  //if the madive() can be used
 
 #if defined(CONFIG_MADVISE)
 
@@ -187,8 +187,8 @@ int qemu_get_thread_id(void);
 
 #ifndef CONFIG_IOVEC
 struct iovec {
-    void *iov_base;
-    size_t iov_len;
+    void *iov_base; //pointer to the data
+    size_t iov_len; //length of data
 };
 /*
  * Use the same value as Linux for now.
