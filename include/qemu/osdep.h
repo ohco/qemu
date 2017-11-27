@@ -1,17 +1,17 @@
-#ifndef QEMU_OSDEP_H
+#ifndef QEMU_OSDEP_H //。。。。。。
 #define QEMU_OSDEP_H
 
-#include "config-host.h"
-#include <stdarg.h>
-#include <stddef.h>
-#include <stdbool.h>
-#include <stdint.h>
+#include "config-host.h" //where exactly it is?
+#include <stdarg.h> //get the parameters when the number of the parameters cannot be ensured
+#include <stddef.h> //define some variable types: ptrdiff_t, size_t and wchar_t. macro: NULL and offsetof(type, member-designator)
+#include <stdbool.h> 
+#include <stdint.h> 
 #include <sys/types.h>
-#ifdef __OpenBSD__
+#ifdef __OpenBSD__ //......if the host system is openBSD?
 #include <sys/signal.h>
 #endif
 
-#ifndef _WIN32
+#ifndef _WIN32 //Defined as 1 when the compilation target is 32-bit ARM, 64-bit ARM, x86, or x64. Otherwise, undefined. BUT WHOSE COMPILATION TARGET? THE HOST OR TARGET?
 #include <sys/wait.h>
 #else
 #define WIFEXITED(x)   1
@@ -29,13 +29,13 @@ typedef signed int              int_fast16_t;
 
 #ifndef glue
 #define xglue(x, y) x ## y
-#define glue(x, y) xglue(x, y)
+#define glue(x, y) xglue(x, y) //why not "glue(x, y) x##y" derictely?
 #define stringify(s)	tostring(s)
-#define tostring(s)	#s
+#define tostring(s)	#s //why???
 #endif
 
 #ifndef likely
-#if __GNUC__ < 3
+#if __GNUC__ < 3 // the version of GCC
 #define __builtin_expect(x, n) (x)
 #endif
 
