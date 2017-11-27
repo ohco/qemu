@@ -12,11 +12,11 @@
  * Contributions after 2012-01-13 are licensed under the terms of the
  * GNU GPL, version 2 or (at your option) any later version.
  */
-#ifndef QEMU_SECCOMP_H
+#ifndef QEMU_SECCOMP_H //define a variable whose usage remains to be known.
 #define QEMU_SECCOMP_H
 
-#include <seccomp.h>
+#include <seccomp.h> //a sandbox system offered by linux, in this secure computing mode, only read(), write(), exit() and sigreturn() are allowed.
 #include "qemu/osdep.h"
 
-int seccomp_start(void);
+int seccomp_start(void); // ????
 #endif
