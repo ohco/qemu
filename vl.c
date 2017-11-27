@@ -21,16 +21,16 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-#include <unistd.h>
-#include <fcntl.h>
+#include <unistd.h> //visit  POSIX's API
+#include <fcntl.h> //deal with file descriptor
 #include <signal.h>
-#include <time.h>
-#include <errno.h>
-#include <sys/time.h>
+#include <time.h> //do operations related time
+#include <errno.h> //return fault by error code
+#include <sys/time.h> //
 
-#include "config-host.h"
+#include "config-host.h" // the head file to define which host this qemu is based on, but the explicit location remians to be found....
 
-#ifdef CONFIG_SECCOMP
+#ifdef CONFIG_SECCOMP //.........
 #include "sysemu/seccomp.h"
 #endif
 
